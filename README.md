@@ -1,9 +1,5 @@
 # Docker MediaWiki
 
-[![DockerHub Pulls](https://img.shields.io/docker/pulls/kristophjunge/mediawiki.svg)](https://hub.docker.com/r/kristophjunge/mediawiki/) [![DockerHub Stars](https://img.shields.io/docker/stars/kristophjunge/mediawiki.svg)](https://hub.docker.com/r/kristophjunge/mediawiki/) [![GitHub Stars](https://img.shields.io/github/stars/kristophjunge/docker-mediawiki.svg?label=github%20stars)](https://github.com/kristophjunge/docker-mediawiki) [![GitHub Forks](https://img.shields.io/github/forks/kristophjunge/docker-mediawiki.svg?label=github%20forks)](https://github.com/kristophjunge/docker-mediawiki) [![GitHub License](https://img.shields.io/github/license/kristophjunge/docker-mediawiki.svg)](https://github.com/kristophjunge/docker-mediawiki)
-
-[![MediaWiki](https://raw.githubusercontent.com/kristophjunge/docker-mediawiki/master/mediawiki.png)](https://www.mediawiki.org)
-
 Docker container for [MediaWiki](https://www.mediawiki.org) running under [Nginx](https://www.nginx.com) and [PHP-FPM](https://php-fpm.org/). Based on the official PHP7 [images](https://hub.docker.com/_/php/).
 
 Packaged with the [VisualEditor](https://www.mediawiki.org/wiki/VisualEditor) plugin and its dependant [Parsoid](https://www.mediawiki.org/wiki/Parsoid) service.
@@ -38,15 +34,11 @@ For a basic understanding of docker please refer to the official [documentation]
 
 ## Supported Tags
 
-- `1.30` [(Dockerfile)](https://github.com/kristophjunge/docker-mediawiki/blob/1.30/Dockerfile)
-- `1.29` [(Dockerfile)](https://github.com/kristophjunge/docker-mediawiki/blob/1.29/Dockerfile)
-- `1.28` [(Dockerfile)](https://github.com/kristophjunge/docker-mediawiki/blob/1.28/Dockerfile)
-- `1.27` [(Dockerfile)](https://github.com/kristophjunge/docker-mediawiki/blob/1.27/Dockerfile)
-
+- `1.31`
 
 ## Features
 
-- [MediaWiki](https://www.mediawiki.org) 1.30.0
+- [MediaWiki](https://www.mediawiki.org) 1.31
 - [Nginx](https://www.nginx.com)
 - [PHP-FPM](https://php-fpm.org/) with [PHP7](https://www.mediawiki.org/wiki/Compatibility/de#PHP)
 - [VisualEditor](https://www.mediawiki.org/wiki/VisualEditor) plugin
@@ -60,15 +52,13 @@ For a basic understanding of docker please refer to the official [documentation]
 
 ## Changelog
 
-See [CHANGELOG.md](https://github.com/kristophjunge/docker-mediawiki/blob/master/docs/CHANGELOG.md) for information about the latest changes.
-
-Please note that version 1.30 has some breaking changes.
+See [CHANGELOG.md](https://github.com/credija/docker-mediawiki/blob/master/docs/CHANGELOG.md) for information about the latest changes.
 
 ## Usage
 
 ### With MySQL
 
-See Docker Compose [example](https://github.com/kristophjunge/docker-mediawiki/blob/master/example/docker-compose/mysql/docker-compose.yml).
+See Docker Compose [example](https://github.com/credija/docker-mediawiki/blob/master/example/docker-compose/mysql/docker-compose.yml).
 
 Start a MySQL container.
 
@@ -99,7 +89,7 @@ docker run --name mediawiki_wiki \
 -e MEDIAWIKI_DB_PASSWORD=mysecret \
 -e MEDIAWIKI_ENABLE_UPLOADS=1 \
 -v /var/mediawiki/images:/images \
--d kristophjunge/mediawiki
+-d credija/mediawiki
 ```
 
 Create a new database with the install script. Insert username and password for your admin account.
@@ -131,7 +121,7 @@ You should be able to browse your wiki at [http://localhost:8080](http://localho
 
 ### With SQLite
 
-See Docker Compose [example](https://github.com/kristophjunge/docker-mediawiki/blob/master/example/docker-compose/sqlite/docker-compose.yml).
+See Docker Compose [example](https://github.com/credija/docker-mediawiki/blob/master/example/docker-compose/sqlite/docker-compose.yml).
 
 Start MediaWiki container.
 
@@ -146,7 +136,7 @@ docker run --name=mediawiki_wiki \
 -e MEDIAWIKI_ENABLE_UPLOADS=1 \
 -v /var/mediawiki/images:/images \
 -v /var/mediawiki/data:/data \
--d kristophjunge/mediawiki
+-d credija/mediawiki
 ```
 
 Create a new database with the install script. Insert username and password for your admin account.
@@ -397,7 +387,7 @@ More information about the configuration values can be found at MediaWiki's [doc
 If you need to create your own Dockerfile you can extend this image.
 
 ```
-FROM kristophjunge/mediawiki:latest
+FROM credija/mediawiki:latest
 
 COPY ./LocalSettings.php /var/www/mediawiki/LocalSettings.php
 
@@ -417,11 +407,15 @@ COPY ./LocalSettings.php /var/www/mediawiki/LocalSettings.php
 
 ## Contributing
 
-See [CONTRIBUTING.md](https://github.com/kristophjunge/docker-mediawiki/blob/master/docs/CONTRIBUTING.md) for information on how to contribute to the project.
+See [CONTRIBUTING.md](https://github.com/credija/docker-mediawiki/blob/master/docs/CONTRIBUTING.md) for information on how to contribute to the project.
 
-See [CONTRIBUTORS.md](https://github.com/kristophjunge/docker-mediawiki/blob/master/docs/CONTRIBUTORS.md) for the list of contributors.
+See [CONTRIBUTORS.md](https://github.com/credija/docker-mediawiki/blob/master/docs/CONTRIBUTORS.md) for the list of contributors.
 
 
 ## License
 
-This project is licensed under the MIT license by Kristoph Junge.
+This project is licensed under the MIT license by Sicoob Credija.
+
+## Credits
+
+Credits for @kristophjunge since it was from him that this project was cloned: https://github.com/kristophjunge/docker-mediawiki.

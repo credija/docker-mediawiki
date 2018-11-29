@@ -4,7 +4,7 @@ version: '3'
 services:
   mediawiki_wiki:
     #build: ./../../../ # Uncomment to build from source
-    image: kristophjunge/mediawiki
+    image: credija/mediawiki
     container_name: mediawiki_wiki
     environment:
       MEDIAWIKI_SERVER: http://localhost:8080

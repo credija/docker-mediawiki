@@ -1,5 +1,5 @@
 FROM php:7.0-fpm
-MAINTAINER Kristoph Junge <kristoph.junge@gmail.com>
+MAINTAINER Kevin Aguiar <kevin.aguiar@credija.com.br>
 
 # Change UID and GID of www-data user to match host privileges
 RUN usermod -u 999 www-data && \
@@ -72,7 +72,7 @@ ENV NODE_PATH /usr/lib/parsoid/node_modules:/usr/lib/parsoid/src
 
 # MediaWiki
 ARG MEDIAWIKI_VERSION_MAJOR=1
-ARG MEDIAWIKI_VERSION_MINOR=30
+ARG MEDIAWIKI_VERSION_MINOR=31
 ARG MEDIAWIKI_VERSION_BUGFIX=0
 
 RUN curl -s -o /tmp/keys.txt https://www.mediawiki.org/keys/keys.txt && \
