@@ -17,7 +17,7 @@ $wgAuthenticationTokenVersion = "1";
 
 $wgGroupPermissions['*']['createaccount'] = false;
 $wgGroupPermissions['*']['edit'] = false;
-$wgGroupPermissions['*']['read'] = read;
+$wgGroupPermissions['*']['read'] = true;
 
 ## For attaching licensing metadata to pages, and displaying an
 ## appropriate copyright notice / icon. GNU Free Documentation
