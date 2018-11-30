@@ -1,7 +1,8 @@
 <?php
 
 # Hack for always opening Visual Editor First
-if($_GET['redlink']==1 && $_GET['action']=='edit') {
+if(isset($_GET['redlink']) && isset($_GET['action']) && isset($_GET['title']) && $_GET['redlink'] == 1 && $_GET['action']=='edit') 
+{
 	header('Location: index.php?title='.$_GET['title'].'&veaction=edit&redlink=1'); 
 	die();
 }
