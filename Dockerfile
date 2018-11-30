@@ -58,7 +58,8 @@ COPY config/supervisor/supervisord.conf /etc/supervisor/conf.d/
 COPY config/supervisor/kill_supervisor.py /usr/bin/
 
 # NodeJS
-RUN curl -sL https://deb.nodesource.com/setup_4.x | bash - && \
+RUN apt-get install -y gnupg && \ 
+    curl -sL https://deb.nodesource.com/setup_11.x | bash - && \
     apt-get install -y nodejs --no-install-recommends
 
 # Parsoid
