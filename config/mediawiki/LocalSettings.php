@@ -1,8 +1,13 @@
 <?php
 
-// @see https://www.mediawiki.org/wiki/Manual:Configuration_settings
+# Hack for always opening Visual Editor First
+if($_GET['redlink']==1 && $_GET['action']=='edit') {
+	header('Location: index.php?title='.$_GET['title'].'&veaction=edit&redlink=1'); 
+	die();
+}
 
 # Protect against web entry
+
 if ( !defined( 'MEDIAWIKI' ) ) {
     exit;
 }
