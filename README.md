@@ -241,15 +241,12 @@ You can change the default skin by setting the environment variable `MEDIAWIKI_D
 
 The default skins are packaged with the container:
 
-* cologneblue
-* modern
-* monobook
 * vector
 
 You can add more skins by mounting them.
 
 ```
--v ./var/mediawiki/skins/MyOtherSkin:/var/www/mediawiki/skins/MyOtherSkin:ro
+-v ./var/mediawiki/skins/Vector:/var/www/mediawiki/skins/Vector:ro
 ```
 
 
