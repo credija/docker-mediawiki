@@ -66,7 +66,7 @@ RUN apt-get update && \
 # Parsoid
 RUN useradd parsoid --no-create-home --home-dir /usr/lib/parsoid --shell /usr/sbin/nologin
 RUN apt-get update && \
-    apt-key advanced --keyserver pgp.mit.edu --recv-keys 90E9F83F22250DD7 && \
+    apt-key advanced --keyserver keys.gnupg.net --recv-keys 90E9F83F22250DD7 && \
     echo "deb https://releases.wikimedia.org/debian jessie-mediawiki main" > /etc/apt/sources.list.d/parsoid.list && \
     apt-get update && \
     apt-get -y install parsoid --no-install-recommends
