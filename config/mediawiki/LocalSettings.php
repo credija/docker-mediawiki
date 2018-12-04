@@ -69,8 +69,8 @@ if (getenv('MEDIAWIKI_DB_PASSWORD') != '') {
     $wgDBpassword = getenv('MEDIAWIKI_DB_PASSWORD');
 }
 
-# MySQL specific settings
-if (getenv('MEDIAWIKI_DB_TYPE') == 'mysql') {
+# MySQL/Postgresql specific settings
+if (getenv('MEDIAWIKI_DB_TYPE') == 'mysql' || getenv('MEDIAWIKI_DB_TYPE') == 'postgresql') {
     // Cache sessions in database
     $wgSessionCacheType = CACHE_DB;
 
