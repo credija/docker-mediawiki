@@ -85,6 +85,11 @@ RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key
     echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list && \
     apt-get update && sudo apt-get install -y elasticsearch
 
+# ADD Composer
+RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+ENV COMPOSER_HOME /root/composer
+ENV PATH=/root/composer/vendor/bin:$PATH
+
 # MediaWiki
 ARG MEDIAWIKI_VERSION_MAJOR=1
 ARG MEDIAWIKI_VERSION_MINOR=31
