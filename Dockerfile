@@ -79,17 +79,6 @@ RUN apt-key advanced --keyserver keys.gnupg.net --recv-keys 90E9F83F22250DD7 && 
 COPY config/parsoid/config.yaml /usr/lib/parsoid/src/config.yaml
 ENV NODE_PATH /usr/lib/parsoid/node_modules:/usr/lib/parsoid/src
 
-# ElasticSearch
-RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add - && \
-    apt-get install -y apt-transport-https && \
-    echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list && \
-    apt-get update && sudo apt-get install -y elasticsearch
-
-# ADD Composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-ENV COMPOSER_HOME /root/composer
-ENV PATH=/root/composer/vendor/bin:$PATH
-
 # MediaWiki
 ARG MEDIAWIKI_VERSION_MAJOR=1
 ARG MEDIAWIKI_VERSION_MINOR=31
@@ -109,6 +98,25 @@ RUN curl -s -o /tmp/keys.txt https://www.mediawiki.org/keys/keys.txt && \
     ln -s /images /var/www/mediawiki/images && \
     chown -R www-data:www-data /data /images /var/www/mediawiki/images
 COPY config/mediawiki/* /var/www/mediawiki/
+
+# ElasticSearch
+#RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add - && \
+#    apt-get install -y apt-transport-https && \
+#    echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list && \
+#    apt-get update && sudo apt-get install -y elasticsearch
+
+# ADD Composer (and after the install copy the Elastica extension to extensions folder, then run composer on Elastica folder)
+#RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+#ENV COMPOSER_HOME /root/composer
+#ENV PATH=/root/composer/vendor/bin:$PATH
+RUN curl -s -o /tmp/extension-elastica.tar.gz https://extdist.wmflabs.org/dist/extensions/Elastica-REL${MEDIAWIKI_VERSION_MAJOR}_${MEDIAWIKI_VERSION_MINOR}-`curl -s https://extdist.wmflabs.org/dist/extensions/ | grep -o -P "(?<=Elastica-REL${MEDIAWIKI_VERSION_MAJOR}_${MEDIAWIKI_VERSION_MINOR}-)[0-9a-z]{7}(?=.tar.gz)" | head -1`.tar.gz && \
+    tar -xzf /tmp/extension-elastica.tar.gz -C /var/www/mediawiki/extensions && \
+    rm /tmp/extension-elastica.tar.gz
+
+# Copy CirrusSearch to the extension folder too, and configure CirrusSearch with the local ElasticSearch instance
+RUN curl -s -o /tmp/extension-cirrus-search.tar.gz https://extdist.wmflabs.org/dist/extensions/CirrusSearch-REL${MEDIAWIKI_VERSION_MAJOR}_${MEDIAWIKI_VERSION_MINOR}-`curl -s https://extdist.wmflabs.org/dist/extensions/ | grep -o -P "(?<=CirrusSearch-REL${MEDIAWIKI_VERSION_MAJOR}_${MEDIAWIKI_VERSION_MINOR}-)[0-9a-z]{7}(?=.tar.gz)" | head -1`.tar.gz && \
+    tar -xzf /tmp/extension-cirrus-search.tar.gz -C /var/www/mediawiki/extensions && \
+    rm /tmp/extension-cirrus-search.tar.gz
 
 # VisualEditor extension
 RUN curl -s -o /tmp/extension-visualeditor.tar.gz https://extdist.wmflabs.org/dist/extensions/VisualEditor-REL${MEDIAWIKI_VERSION_MAJOR}_${MEDIAWIKI_VERSION_MINOR}-`curl -s https://extdist.wmflabs.org/dist/extensions/ | grep -o -P "(?<=VisualEditor-REL${MEDIAWIKI_VERSION_MAJOR}_${MEDIAWIKI_VERSION_MINOR}-)[0-9a-z]{7}(?=.tar.gz)" | head -1`.tar.gz && \
