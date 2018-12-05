@@ -100,10 +100,10 @@ RUN curl -s -o /tmp/keys.txt https://www.mediawiki.org/keys/keys.txt && \
 COPY config/mediawiki/* /var/www/mediawiki/
 
 # ElasticSearch
-#RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add - && \
+#RUN wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | apt-key add - && \
 #    apt-get install -y apt-transport-https && \
-#    echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-6.x.list && \
-#    apt-get update && sudo apt-get install -y elasticsearch
+#    echo "deb https://artifacts.elastic.co/packages/6.x/apt stable main" | tee -a /etc/apt/sources.list.d/elastic-6.x.list && \
+#    apt-get update && apt-get install -y elasticsearch
 
 # ADD Composer (and after the install copy the Elastica extension to extensions folder, then run composer on Elastica folder)
 #RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
